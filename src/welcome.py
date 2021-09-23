@@ -41,7 +41,6 @@ class Welcome(Gtk.Box):
         '''Our class will be a Gtk.Box and will contain our 
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
-        
         self.parent = parent
 
         '''Your app needs translations, right?
@@ -91,6 +90,10 @@ class Welcome(Gtk.Box):
         activated signal of the Welcome Widget, so this will be triggered 
         when an action is activated'''
         welcome.connect("activated", self.on_welcome_activated)
+        
+        self.parent.parent.hbar.hbar_new_file.set_sensitive(False)
+        self.parent.parent.hbar.hbar_save_file.set_sensitive(False)
+        self.parent.parent.hbar.hbar_save_as_file.set_sensitive(False)
 
         '''Do you remember the Box we were talking about at the beginning?
         Here, we add the Welcome Widget to this.'''

@@ -32,9 +32,10 @@ class Headerbar(Gtk.HeaderBar):
     '''Getting system default settings'''
     settings = Gtk.Settings.get_default()
 
-    def __init__(self):
+    def __init__(self, parent):
 
         Gtk.HeaderBar.__init__(self)
+        self.parent = parent
 
         '''Here we are setting some parameters for the HeaderBar
         <https://developer.gnome.org/gtk3/stable/GtkHeaderBar.html>'''

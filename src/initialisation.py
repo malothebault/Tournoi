@@ -24,6 +24,7 @@ class Initialisation(Gtk.Box):
         '''Our class will be a Gtk.Box and will contain our 
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
+        self.parent = parent
 
         '''Your app needs translations, right?
         Here we are trying to set the locale_path to the system one, assuming 
@@ -48,4 +49,7 @@ class Initialisation(Gtk.Box):
         Note: that if the translation is not loaded (the check above), 
               self._ will be the same as str, so you won't get any errors.'''
         self._ = _
+        
+        self.parent.parent.hbar.hbar_save_file.set_sensitive(True)
+        self.parent.parent.hbar.hbar_save_as_file.set_sensitive(True)
 

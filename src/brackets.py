@@ -24,6 +24,7 @@ class Brackets(Gtk.Box):
         '''Our class will be a Gtk.Box and will contain our 
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
+        self.parent = parent
 
         '''Your app needs translations, right?
         Here we are trying to set the locale_path to the system one, assuming 

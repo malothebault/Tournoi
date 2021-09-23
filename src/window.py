@@ -39,8 +39,8 @@ class Window(Gtk.Window):
 
         '''Here we are creating a new instance of Headerbar 
         and setting as the titlebar'''
-        hbar = hb.Headerbar()
-        self.set_titlebar(hbar)
+        self.hbar = hb.Headerbar(self)
+        self.set_titlebar(self.hbar)
 
         '''This is a new instance of Welcome, we are 
         simply adding it to the window
