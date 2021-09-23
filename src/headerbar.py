@@ -152,7 +152,6 @@ class Headerbar(Gtk.HeaderBar):
     #     )
     
     def on_hbar_theme_switcher(self, widget):
-        print("Hella")
         theme = self.settings.get_property(
             "gtk-application-prefer-dark-theme"
         )
@@ -160,5 +159,3 @@ class Headerbar(Gtk.HeaderBar):
             "gtk-application-prefer-dark-theme", 
             not theme # theme is a bool, we are reversing it
         )
-        print("Hello")
-        

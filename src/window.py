@@ -26,7 +26,8 @@ from gi.repository import Gtk
 
 import constants as cn
 import headerbar as hb
-import welcome as wl
+# import welcome as wl
+import stack as sk
 
 class Window(Gtk.Window):
 
@@ -45,5 +46,7 @@ class Window(Gtk.Window):
         simply adding it to the window
         Note: Not all applications need a Welcome Page, make 
         your choice well.'''
-        self.welcome = wl.Welcome()
-        self.add(self.welcome)
+        # self.welcome = wl.Welcome()
+        # self.add(self.welcome)
+        self.stack = sk.Stack(self)
+        self.add(self.stack)

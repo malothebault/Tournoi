@@ -37,10 +37,12 @@ class Welcome(Gtk.Box):
     '''Getting system default settings'''
     settings = Gtk.Settings.get_default()
 
-    def __init__(self):
+    def __init__(self, parent):
         '''Our class will be a Gtk.Box and will contain our 
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
+        
+        self.parent = parent
 
         '''Your app needs translations, right?
         Here we are trying to set the locale_path to the system one, assuming 
@@ -97,30 +99,9 @@ class Welcome(Gtk.Box):
     def on_welcome_activated(self, widget, index):
         '''The activated signal return an index with the activated item, we
         will use this to perform different actions'''
-
         if index == 0:
-            '''Pssst.. Array starts from 0. So this is our first action.
-            We are toggling the Dark theme based on the system settings.'''
-            theme = self.settings.get_property(
-                "gtk-application-prefer-dark-theme"
-            )
-            self.settings.set_property(
-                "gtk-application-prefer-dark-theme", 
-                not theme # theme is a bool, we are reversing it
-            )
-        elif index == 1:
-            try:
-                subprocess.check_output("io.elementary.terminal")
-            except:
-                print(self._('Terminal Not Found!'))
-        elif index == 2:
-            webbrowser.open_new_tab(
-                "https://github.com/mirkobrombin/ElementaryPython"
-            )
+            # New Tournament
+            self.parent.stack.set_visible_child_name("initialisation")
         else:
-            webbrowser.open_new_tab(
-                "https://valadoc.org/granite/Granite.html"
-            )
-
-        '''Printing the Index just for Debug purposes.'''
-        print(f"Index: {str(index)}")
+            # Open Recent
+            self.parent.stack.set_visible_child_name("brackets")
