@@ -47,20 +47,20 @@ except FileNotFoundError:
 class App:
     '''Here we are defining our Application infos, so we can easily
     use in all our application files'''
-    application_shortname = "elementarypython"
-    application_id = "com.github.mirkobrombin.elementarypython"
-    application_name = "Tournament"
-    application_description = _('This is just a python template')
-    application_version ="1.1"
-    app_years = "2017-2018"
-    main_url = "https://git.mirko.pm/brombinmirko/ElementaryPython"
-    bug_url = "https://git.mirko.pm/brombinmirko/ElementaryPython/issues/labels/bug"
-    help_url = "https://git.mirko.pm/brombinmirko/ElementaryPython/issues"
-    translate_url = "https://git.mirko.pm/brombinmirko/ElementaryPython/blob/master/CONTRIBUTING.md"
+    application_shortname = "tournoi"
+    application_id = "com.github.malothebault.tournoi"
+    application_name = "Tournoi"
+    application_description = _('Create a tournament with ease')
+    application_version ="0.1"
+    app_years = "2021"
+    main_url = "https://github.com/malothebault/Tournoi"
+    bug_url = "https://github.com/malothebault/Tournoi/issues/labels/bug"
+    help_url = "https://github.com/malothebault/Tournoi/issues"
+    translate_url = "https://github.com/malothebault/Tournoi/issues/labels/translation"
     about_comments = application_description
     about_license_type = Gtk.License.GPL_3_0
 
 class Colors:
-    primary_color = "rgba(100, 85, 82, 1)"
-    primary_text_color = "#EEEDEC"
-    primary_text_shadow_color = "#53433F"
+    primary_color = "#E3D59E"
+    primary_text_color = "#270F2B"
+    primary_text_shadow_color = "#303030"

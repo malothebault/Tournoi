@@ -7,6 +7,7 @@ install_data = [
     ('share/applications', ['data/com.github.malothebault.tournoi.desktop']),
     ('share/metainfo', ['data/com.github.malothebault.tournoi.appdata.xml']),
     ('share/icons/hicolor/128x128/apps',['data/com.github.malothebault.tournoi.svg']),
+    ('share/glib-2.0/schemas', ["data/com.github.malothebault.tournoi.gschema.xml"]),
     ('bin/tournoi',['src/constants.py']),
     ('bin/tournoi',['src/headerbar.py']),
     ('bin/tournoi',['src/main.py']),

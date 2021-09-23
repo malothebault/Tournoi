@@ -75,24 +75,14 @@ class Welcome(Gtk.Box):
 
         '''Let's populate the Welcome menu actions.'''
         welcome.append(
-            "weather-clear-night", # the action icon (a valid icon name)
-            _('Dark Mode'), # the action name
-            _('Switch to the dark side') # the action description
+            "document-new", # the action icon (a valid icon name)
+            _('New tournament'), # the action name
+            _('Open a new tournament window') # the action description
         )
         welcome.append(
-            "utilities-terminal",
-            _('Open Terminal'), 
-            _('Just an example of action')
-        )
-        welcome.append(
-            "help-contents", 
-            _('Info'), 
-            _('Learn more about this application')
-        )
-        welcome.append(
-            "help-browser", 
-            _('Doc'), 
-            _('Valadoc for Granite')
+            "document-open-recent",
+            _('Open recent tournament'), 
+            _('Open a recent Tournament session from file')
         )
 
         '''Here we are connecting the on_welcome_activated method to the 

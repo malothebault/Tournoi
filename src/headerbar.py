@@ -65,18 +65,9 @@ class Headerbar(Gtk.HeaderBar):
         )
         self.pack_end(self.hbar_color)
         
+
         self.hbar_theme = Gtk.ToolButton()
-        dark = self.settings.get_property(
-            "gtk-application-prefer-dark-theme"
-        )
-        if dark:
-            self.hbar_theme.set_icon_name( # setting the button icon name
-                "weather-clear-night" 
-            )
-        else:
-             self.hbar_theme.set_icon_name( # setting the button icon name
-                 "weather-clear" 
-             )
+        self.hbar_theme.set_icon_name("weather-clear-night") 
         self.hbar_theme.connect(
             "clicked",
             self.on_hbar_theme_switcher

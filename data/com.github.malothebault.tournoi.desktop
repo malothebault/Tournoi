@@ -1,11 +1,11 @@
 [Desktop Entry]
-Name=Elementary Python
-GenericName=ElementaryPython
-Comment=This is just a python template
+Name=Tournoi
+GenericName=Tournoi
+Comment=Create a tournament with ease
 Categories=Development;
-Exec=com.github.mirkobrombin.elementarypython
-Icon=com.github.mirkobrombin.elementarypython
+Exec=com.github.malothebault.tournoi
+Icon=com.github.malothebault.tournoi
 Terminal=false
 Type=Application
-X-GNOME-Gettext-Domain=com.github.mirkobrombin.elementarypython
+X-GNOME-Gettext-Domain=com.github.malothebault.tournoi
 Keywords=Python;
