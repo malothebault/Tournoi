@@ -41,31 +41,69 @@ class Headerbar(Gtk.HeaderBar):
         self.set_show_close_button(True)
         self.props.title = cn.App.application_name
 
-        '''Now we want to display some buttons in our HeaderBar. We are
-        using ToolButton, a gtk.ToolItem subclass that displays buttons'''
-        self.hbar_help = Gtk.ToolButton() # a new instance
-        self.hbar_help.set_icon_name( # setting the button icon name
-            "help-contents" 
+        '''NEW DOCUMENT BUTTON'''
+        self.hbar_new_file = Gtk.ToolButton() # a new instance
+        self.hbar_new_file.set_icon_name( # setting the button icon name
+            "document-new" 
         ) 
-        self.hbar_help.connect( # connecting our method to the clicked signal
+        self.hbar_new_file.connect( # connecting our method to the clicked signal
             "clicked", 
-            self.on_hbar_help_clicked
+            self.on_hbar_new_file_clicked
         )
-        self.pack_end( # packing the button to the end of the HeaderBar
-            self.hbar_help
+        self.pack_start( # packing the button to the start of the HeaderBar
+            self.hbar_new_file
+        )
+        
+        '''OPEN DOCUMENT BUTTON'''
+        self.hbar_open_file = Gtk.ToolButton() # a new instance
+        self.hbar_open_file.set_icon_name( # setting the button icon name
+            "document-open" 
+        ) 
+        self.hbar_open_file.connect( # connecting our method to the clicked signal
+            "clicked", 
+            self.on_hbar_open_file_clicked
+        )
+        self.pack_start( # packing the button to the start of the HeaderBar
+            self.hbar_open_file
+        )
+        
+        '''SAVE DOCUMENT BUTTON'''
+        self.hbar_save_file = Gtk.ToolButton() # a new instance
+        self.hbar_save_file.set_icon_name( # setting the button icon name
+            "document-save" 
+        ) 
+        self.hbar_save_file.connect( # connecting our method to the clicked signal
+            "clicked", 
+            self.on_hbar_save_file_clicked
+        )
+        self.pack_start( # packing the button to the start of the HeaderBar
+            self.hbar_save_file
+        )
+        
+        '''SAVE AS DOCUMENT BUTTON'''
+        self.hbar_save_as_file = Gtk.ToolButton() # a new instance
+        self.hbar_save_as_file.set_icon_name( # setting the button icon name
+            "document-save-as" 
+        ) 
+        self.hbar_save_as_file.connect( # connecting our method to the clicked signal
+            "clicked", 
+            self.on_hbar_save_as_file_clicked
+        )
+        self.pack_start( # packing the button to the start of the HeaderBar
+            self.hbar_save_as_file
         )
         
         '''Another button, this can be used for choosing Application colors'''
-        self.hbar_color = Gtk.ColorButton.new_with_rgba(
-            Gdk.RGBA(222, 222, 222, 255)
-        )
-        self.hbar_color.connect(
-            "color_set", 
-            self.on_hbar_color_color_set
-        )
-        self.pack_end(self.hbar_color)
+        # self.hbar_color = Gtk.ColorButton.new_with_rgba(
+        #     Gdk.RGBA(222, 222, 222, 255)
+        # )
+        # self.hbar_color.connect(
+        #     "color_set", 
+        #     self.on_hbar_color_color_set
+        # )
+        # self.pack_end(self.hbar_color)
         
-
+        '''THEME BUTTON'''
         self.hbar_theme = Gtk.ToolButton()
         self.hbar_theme.set_icon_name("weather-clear-night") 
         self.hbar_theme.connect(
@@ -74,30 +112,44 @@ class Headerbar(Gtk.HeaderBar):
         )
         self.pack_end(self.hbar_theme)
 
-    '''Each button should perform actions, no?
-    We are creating custom methods for each button.'''
-    def on_hbar_help_clicked(self, widget):
+    '''ACTIONS'''
+    def on_hbar_new_file_clicked(self, widget):
+        webbrowser.open_new_tab(
+            "https://github.com/mirkobrombin/ElementaryPython"
+        )
+        
+    def on_hbar_open_file_clicked(self, widget):
+        webbrowser.open_new_tab(
+            "https://github.com/mirkobrombin/ElementaryPython"
+        )
+    
+    def on_hbar_save_file_clicked(self, widget):
+        webbrowser.open_new_tab(
+            "https://github.com/mirkobrombin/ElementaryPython"
+        )
+    
+    def on_hbar_save_as_file_clicked(self, widget):
         webbrowser.open_new_tab(
             "https://github.com/mirkobrombin/ElementaryPython"
         )
 
-    def on_hbar_color_color_set(self, widget):
-        print("Hi")
-        cn.Colors.primary_color = widget.get_rgba().to_string()
+    # def on_hbar_color_color_set(self, widget):
+    #     print("Hi")
+    #     cn.Colors.primary_color = widget.get_rgba().to_string()
 
-        stylesheet = f"""
-            @define-color colorPrimary {cn.Colors.primary_color};
-            @define-color textColorPrimary {cn.Colors.primary_text_color};
-            @define-color textColorPrimaryShadow {cn.Colors.primary_text_shadow_color};
-        """
+    #     stylesheet = f"""
+    #         @define-color colorPrimary {cn.Colors.primary_color};
+    #         @define-color textColorPrimary {cn.Colors.primary_text_color};
+    #         @define-color textColorPrimaryShadow {cn.Colors.primary_text_shadow_color};
+    #     """
 
-        style_provider = Gtk.CssProvider()
-        style_provider.load_from_data(bytes(stylesheet.encode()))
-        Gtk.StyleContext.add_provider_for_screen(
-            Gdk.Screen.get_default(), 
-            style_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        )
+    #     style_provider = Gtk.CssProvider()
+    #     style_provider.load_from_data(bytes(stylesheet.encode()))
+    #     Gtk.StyleContext.add_provider_for_screen(
+    #         Gdk.Screen.get_default(), 
+    #         style_provider,
+    #         Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    #     )
     
     def on_hbar_theme_switcher(self, widget):
         print("Hella")
