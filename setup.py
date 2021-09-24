@@ -14,6 +14,7 @@ install_data = [
     ('bin/tournoi',['src/initialisation.py']),
     ('bin/tournoi',['src/main.py']),
     ('bin/tournoi',['src/stack.py']),
+    ('bin/tournoi',['src/teams.py']),
     ('bin/tournoi',['src/welcome.py']),
     ('bin/tournoi',['src/window.py']),
     ('bin/tournoi',['src/__init__.py']),

@@ -81,17 +81,17 @@ class Headerbar(Gtk.HeaderBar):
             self.hbar_save_file
         )
         
-        '''SAVE AS DOCUMENT BUTTON'''
-        self.hbar_save_as_file = Gtk.ToolButton() # a new instance
-        self.hbar_save_as_file.set_icon_name( # setting the button icon name
-            "document-save-as" 
+        '''PRINT DOCUMENT BUTTON'''
+        self.hbar_print = Gtk.ToolButton() # a new instance
+        self.hbar_print.set_icon_name( # setting the button icon name
+            "document-print" 
         ) 
-        self.hbar_save_as_file.connect( # connecting our method to the clicked signal
+        self.hbar_print.connect( # connecting our method to the clicked signal
             "clicked", 
-            self.on_hbar_save_as_file_clicked
+            self.on_hbar_print_clicked
         )
         self.pack_start( # packing the button to the start of the HeaderBar
-            self.hbar_save_as_file
+            self.hbar_print
         )
         
         '''Another button, this can be used for choosing Application colors'''
@@ -115,24 +115,16 @@ class Headerbar(Gtk.HeaderBar):
 
     '''ACTIONS'''
     def on_hbar_new_file_clicked(self, widget):
-        webbrowser.open_new_tab(
-            "https://github.com/mirkobrombin/ElementaryPython"
-        )
+        self.parent.stack.set_visible_child_name("initialisation")
         
     def on_hbar_open_file_clicked(self, widget):
-        webbrowser.open_new_tab(
-            "https://github.com/mirkobrombin/ElementaryPython"
-        )
+        self.parent.stack.set_visible_child_name("brackets")
     
     def on_hbar_save_file_clicked(self, widget):
-        webbrowser.open_new_tab(
-            "https://github.com/mirkobrombin/ElementaryPython"
-        )
+        None
     
-    def on_hbar_save_as_file_clicked(self, widget):
-        webbrowser.open_new_tab(
-            "https://github.com/mirkobrombin/ElementaryPython"
-        )
+    def on_hbar_print_clicked(self, widget):
+        None
 
     # def on_hbar_color_color_set(self, widget):
     #     print("Hi")

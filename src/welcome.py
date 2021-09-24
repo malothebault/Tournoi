@@ -43,9 +43,7 @@ class Welcome(Gtk.Box):
         Gtk.Box.__init__(self, False, 0)
         self.parent = parent
 
-        '''Your app needs translations, right?
-        Here we are trying to set the locale_path to the system one, assuming 
-        the app is installed.'''
+        ########### TRANSLATION ##############
         try:
             current_locale, encoding = locale.getdefaultlocale()
             locale_path = os.path.join(
@@ -62,10 +60,8 @@ class Welcome(Gtk.Box):
             _ = translate.gettext
         except FileNotFoundError:
             _ = str
-        ''''The self._ can be used for defining a new translation string.
-        Note: that if the translation is not loaded (the check above), 
-              self._ will be the same as str, so you won't get any errors.'''
         self._ = _
+        ######################################
 
         '''Here we are creating a new Welcome Widget from the Granite library'''
         welcome = Granite.WidgetsWelcome()
@@ -91,9 +87,8 @@ class Welcome(Gtk.Box):
         when an action is activated'''
         welcome.connect("activated", self.on_welcome_activated)
         
-        self.parent.parent.hbar.hbar_new_file.set_sensitive(False)
         self.parent.parent.hbar.hbar_save_file.set_sensitive(False)
-        self.parent.parent.hbar.hbar_save_as_file.set_sensitive(False)
+        self.parent.parent.hbar.hbar_print.set_sensitive(False)
 
         '''Do you remember the Box we were talking about at the beginning?
         Here, we add the Welcome Widget to this.'''
@@ -102,6 +97,8 @@ class Welcome(Gtk.Box):
     def on_welcome_activated(self, widget, index):
         '''The activated signal return an index with the activated item, we
         will use this to perform different actions'''
+        self.parent.parent.hbar.hbar_save_file.set_sensitive(True)
+        self.parent.parent.hbar.hbar_print.set_sensitive(True)
         if index == 0:
             # New Tournament
             self.parent.stack.set_visible_child_name("initialisation")
