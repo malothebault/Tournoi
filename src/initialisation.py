@@ -25,6 +25,8 @@ class Initialisation(Gtk.Box):
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
         self.parent = parent
+        self.nb = 2
+        self.returned_list = {}
 
         ########### TRANSLATION ##############
         try:
@@ -56,39 +58,21 @@ class Initialisation(Gtk.Box):
         grid.set_column_spacing(35)
         
         # Widgets creation
+        scroll_w = Gtk.ScrolledWindow.new(None, None)
+        self.listbox = Gtk.ListBox.new()
+        self.listbox.get_style_context().add_class('config-list-box')
+        scroll_w.add(self.listbox)
         validate_button = Gtk.Button.new_with_label(_("Validate"))
         validate_button.get_style_context().add_class('suggested-action')
         validate_button.connect("clicked", self.on_validate_clicked)
         nb_team_button = Gtk.SpinButton.new_with_range(2,8,1)
+        nb_team_button.connect("value_changed", self.on_spin_button_value_changed)
         random_team_attributes = Gtk.Button.new_with_label(_("Random team names and colors"))
-        scroll_w = Gtk.ScrolledWindow.new(None, None)
-        listbox = Gtk.ListBox.new()
-        listbox.get_style_context().add_class('config-list-box')
-        scroll_w.add(listbox)
         
-        row_1 = Gtk.ListBoxRow()
-        box_1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=100)
-        box_1.set_border_width(10)
-        entry = Gtk.Entry()
-        entry.set_placeholder_text("Team name")
-        color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(222, 222, 222, 255))
-        color.connect("color_set", self.on_color_color_set)
-        box_1.pack_start(entry, True, True, 0)
-        box_1.pack_end(color, False, False, 0)
-        row_1.add(box_1)
-        listbox.add(row_1)
-        
-        row_2 = Gtk.ListBoxRow()
-        box_2 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=100)
-        box_2.set_border_width(10)
-        entry = Gtk.Entry()
-        entry.set_placeholder_text("Team name")
-        color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(222, 0, 222, 255))
-        color.connect("color_set", self.on_color_color_set)
-        box_2.pack_start(entry, True, True, 0)
-        box_2.pack_end(color, False, False, 0)
-        row_2.add(box_2)
-        listbox.add(row_2)
+        self.row_list = []
+        self.box_list = []
+        for i in range(self.nb):
+            self.new_row(i)
         
         # Attach widgets to the grid
         grid.attach(nb_team_button, 0, 0, 1, 1)
@@ -98,26 +82,44 @@ class Initialisation(Gtk.Box):
         
         self.pack_start(grid, True, False, 0)
         
-    # def on_spin_button():
-    #     get_value_as_int()
+    def on_spin_button_value_changed(self, widget):
+        nbr = widget.get_value_as_int()
+        if nbr > self.nb:
+            self.nb = nbr
+            self.new_row(self.nb - 1)
+            self.listbox.show_all()
+        elif nbr < self.nb:
+            self.remove_row(self.nb - 1)
+            self.listbox.show_all()
+            self.nb = nbr
+        else:
+            None
     
     def on_color_color_set(self, widget):
         print("Hi")
-        # cn.Colors.primary_color = widget.get_rgba().to_string()
 
-        # stylesheet = f"""
-        #     @define-color colorPrimary {cn.Colors.primary_color};
-        #     @define-color textColorPrimary {cn.Colors.primary_text_color};
-        #     @define-color textColorPrimaryShadow {cn.Colors.primary_text_shadow_color};
-        # """
-
-        # style_provider = Gtk.CssProvider()
-        # style_provider.load_from_data(bytes(stylesheet.encode()))
-        # Gtk.StyleContext.add_provider_for_screen(
-        #     Gdk.Screen.get_default(), 
-        #     style_provider,
-        #     Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        # )
-    
     def on_validate_clicked(self, widget):
+        for i in self.box_list:
+            i.entry
         self.parent.stack.set_visible_child_name("brackets")
+        
+    def get_nb_team(self):
+        return self.nb
+    
+    def new_row(self, i):
+        self.row_list.append(Gtk.ListBoxRow())
+        self.box_list.append(Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=100))
+        self.box_list[i].set_border_width(10)
+        entry = Gtk.Entry()
+        entry.set_placeholder_text("Team name")
+        color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(255, 255, 255, 255))
+        color.connect("color_set", self.on_color_color_set)
+        self.box_list[i].pack_start(entry, True, True, 0)
+        self.box_list[i].pack_end(color, False, False, 0)
+        self.row_list[i].add(self.box_list[i])
+        self.listbox.add(self.row_list[i])
+    
+    def remove_row(self, i):
+        self.listbox.remove(self.row_list[i])
+        del self.box_list[i]
+        del self.row_list[i]
