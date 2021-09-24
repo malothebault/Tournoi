@@ -26,7 +26,7 @@ class Initialisation(Gtk.Box):
         Gtk.Box.__init__(self, False, 0)
         self.parent = parent
         self.nb = 2
-        self.returned_list = {}
+        self.returned_list = []
 
         ########### TRANSLATION ##############
         try:
@@ -100,7 +100,11 @@ class Initialisation(Gtk.Box):
 
     def on_validate_clicked(self, widget):
         for i in self.box_list:
-            i.entry
+            child = i.get_children()
+            text = child[0].get_text()
+            color = child[1].get_color()
+            self.returned_list.append({'name':text, 'color':color})
+        print(self.returned_list)
         self.parent.stack.set_visible_child_name("brackets")
         
     def get_nb_team(self):
