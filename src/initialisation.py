@@ -58,6 +58,7 @@ class Initialisation(Gtk.Box):
         # Widgets creation
         validate_button = Gtk.Button.new_with_label(_("Validate"))
         validate_button.get_style_context().add_class('suggested-action')
+        validate_button.connect("clicked", self.on_validate_clicked)
         nb_team_button = Gtk.SpinButton.new_with_range(2,8,1)
         random_team_attributes = Gtk.Button.new_with_label(_("Random team names and colors"))
         scroll_w = Gtk.ScrolledWindow.new(None, None)
@@ -117,3 +118,6 @@ class Initialisation(Gtk.Box):
         #     style_provider,
         #     Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         # )
+    
+    def on_validate_clicked(self, widget):
+        self.parent.stack.set_visible_child_name("brackets")
