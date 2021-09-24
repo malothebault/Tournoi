@@ -64,6 +64,7 @@ class Brackets(Gtk.Box):
                 (0,2,{'name':"Alice",'color':"Red",'points':0}),
                 (1,1,{'name':"Fred",'color':"Green",'points':0})]
         
+        bbox = {}
         buttons = {}
         COL = 0
         ROW = 1
@@ -71,11 +72,26 @@ class Brackets(Gtk.Box):
         WIDTH = 1
         HEIGHT = 1
         for i in range(len(liste)):
-            buttons[i] = Gtk.Button.new_with_label(liste[i][DICT].get('name'))
-            brackets.attach(buttons[i],
+            bbox[i] = Gtk.ButtonBox()
+            team_name_label = Gtk.Label(liste[i][DICT].get('name'))
+            bbox[i].pack_start(team_name_label, False, False, 0)
+            edit_button = Gtk.Button(label=_("Calculate"))
+            # apply_button.connect('clicked', self.apply_clicked)
+            bbox[i].pack_end(edit_button, False, False, 6)
+            delete_button = Gtk.Button(label=_("Clear"))
+            # clear_button.connect('clicked', self.clear_clicked)
+            bbox[i].pack_end(delete_button, False, False, 6)
+            brackets.attach(bbox[i],
                         liste[i][COL],
                         liste[i][ROW],
                         WIDTH,
                         HEIGHT)
+            
+            # buttons[i] = Gtk.Button.new_with_label(liste[i][DICT].get('name'))
+            # brackets.attach(buttons[i],
+            #             liste[i][COL],
+            #             liste[i][ROW],
+            #             WIDTH,
+            #             HEIGHT)
         # self.teams = tm.Teams(3)
         self.pack_start(brackets, True, True, 0)

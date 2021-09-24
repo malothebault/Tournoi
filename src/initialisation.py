@@ -13,7 +13,12 @@ gi.require_version('Granite', '1.0')
 
 from gi.repository import Gtk, Granite, Gdk
 
-import constants as cn
+try:
+    import constants as cn
+    import listofname as ln
+except ImportError:
+    import tournoi.constants as cn
+    import tournoi.listofname as ln
 
 class Initialisation(Gtk.Box):
 
@@ -24,6 +29,7 @@ class Initialisation(Gtk.Box):
         '''Our class will be a Gtk.Box and will contain our 
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
+        self.listofname = ln.ListOfName(self)
         self.parent = parent
         self.nb = 2
         self.returned_list = []
@@ -68,6 +74,7 @@ class Initialisation(Gtk.Box):
         nb_team_button = Gtk.SpinButton.new_with_range(2,8,1)
         nb_team_button.connect("value_changed", self.on_spin_button_value_changed)
         random_team_attributes = Gtk.Button.new_with_label(_("Random team names and colors"))
+        random_team_attributes.connect("clicked", self.on_random_team_attributes_clicked)
         
         self.row_list = []
         self.box_list = []
@@ -94,9 +101,6 @@ class Initialisation(Gtk.Box):
             self.nb = nbr
         else:
             None
-    
-    def on_color_color_set(self, widget):
-        print("Hi")
 
     def on_validate_clicked(self, widget):
         for i in self.box_list:
@@ -104,8 +108,12 @@ class Initialisation(Gtk.Box):
             text = child[0].get_text()
             color = child[1].get_color()
             self.returned_list.append({'name':text, 'color':color})
-        print(self.returned_list)
         self.parent.stack.set_visible_child_name("brackets")
+        
+    def on_random_team_attributes_clicked(self, widget):
+        for i in self.box_list:
+            child = i.get_children()
+            child[0].set_text(self.listofname.select_random())
         
     def get_nb_team(self):
         return self.nb
@@ -117,7 +125,6 @@ class Initialisation(Gtk.Box):
         entry = Gtk.Entry()
         entry.set_placeholder_text("Team name")
         color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(255, 255, 255, 255))
-        color.connect("color_set", self.on_color_color_set)
         self.box_list[i].pack_start(entry, True, True, 0)
         self.box_list[i].pack_end(color, False, False, 0)
         self.row_list[i].add(self.box_list[i])
