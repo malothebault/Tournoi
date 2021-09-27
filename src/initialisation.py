@@ -16,9 +16,11 @@ from gi.repository import Gtk, Granite, Gdk
 try:
     import constants as cn
     import listofname as ln
+    import brackets as bk
 except ImportError:
     import tournoi.constants as cn
     import tournoi.listofname as ln
+    import tournoi.brackets as bk
 
 class Initialisation(Gtk.Box):
 
@@ -108,6 +110,9 @@ class Initialisation(Gtk.Box):
             text = child[0].get_text()
             color = child[1].get_color()
             self.returned_list.append({'name':text, 'color':color})
+        self.parent.brackets = bk.Brackets(self.parent, self.returned_list)
+        self.parent.stack.add_titled(self.parent.brackets, "brackets", "Brackets")
+        self.parent.brackets.show_all()
         self.parent.stack.set_visible_child_name("brackets")
         
     def on_random_team_attributes_clicked(self, widget):
