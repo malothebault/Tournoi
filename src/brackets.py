@@ -30,6 +30,7 @@ class Brackets(Gtk.Box):
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
         self.parent = parent
+        icon_size = Gtk.IconSize.MENU
 
         ########### TRANSLATION ##############
         try:
@@ -72,14 +73,16 @@ class Brackets(Gtk.Box):
         WIDTH = 1
         HEIGHT = 1
         for i in range(len(liste)):
-            bbox[i] = Gtk.ButtonBox()
+            bbox[i] = Gtk.Box()
             team_name_label = Gtk.Label(liste[i][DICT].get('name'))
-            bbox[i].pack_start(team_name_label, False, False, 0)
-            edit_button = Gtk.Button(label=_("Calculate"))
-            # apply_button.connect('clicked', self.apply_clicked)
+            bbox[i].pack_start(team_name_label, True, True, 0)
+            edit_button = Gtk.Button.new_from_icon_name("accessories-text-editor-symbolic", icon_size)
+            edit_button.connect('clicked', self.on_edit_button_clicked)
             bbox[i].pack_end(edit_button, False, False, 6)
-            delete_button = Gtk.Button(label=_("Clear"))
-            # clear_button.connect('clicked', self.clear_clicked)
+            delete_button = Gtk.Button.new_from_icon_name("edit-delete-symbolic", icon_size)
+            delete_button.get_style_context().add_class('destructive-action')
+            delete_button.valign = Gtk.Align.CENTER
+            delete_button.connect('clicked', self.on_delete_button_clicked)
             bbox[i].pack_end(delete_button, False, False, 6)
             brackets.attach(bbox[i],
                         liste[i][COL],
@@ -95,3 +98,10 @@ class Brackets(Gtk.Box):
             #             HEIGHT)
         # self.teams = tm.Teams(3)
         self.pack_start(brackets, True, True, 0)
+        
+        
+    def on_edit_button_clicked (self, widget):
+        print("edit")
+    
+    def on_delete_button_clicked (self, widget):
+        print("delete")
