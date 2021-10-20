@@ -24,6 +24,7 @@ class Round:
     def __init__(self, parent, list_of_teams):
         
         self.list_of_teams = list_of_teams
+        self.parent = parent
         
         ########### TRANSLATION ##############
         try:
@@ -45,14 +46,33 @@ class Round:
         self._ = _
         ######################################
         
-        dict_to_return = {}
-        for i in self.list_of_teams:
-            picked_team = random.choice(self.list_of_teams)
-            if i % 2 == 0:
-                None
-            elif i % 2 == 1:
-                None
+        list_to_return = []
+        list_len = self.next_power_of_2(self.get_nb_of_teams)
+        nb_of_ghosts = list_len - self.get_nb_of_teams
+        
+        for i in range(list_len):
+            if i < nb_of_ghosts:
+                team = Team("Ghost "+str(i))
+                list_to_return.append(team)
+            else:
+                team = Team(list_of_teams[i - nb_of_ghosts].get('name'))
+                list_to_return.append(team)
                 
         
     def get_nb_of_teams():
         return len(self.list_of_teams)
+    
+    def next_power_of_2(x):  
+        return 1 if x == 0 else 2**(x - 1).bit_length()
+
+
+        
+class Team:
+    def __init__(self, name):
+        self.name = name
+        self.coordinate
+        
+        
+class NotATeam:
+    def __init__(self):
+        self.coordinate

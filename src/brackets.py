@@ -63,6 +63,8 @@ class Brackets(Gtk.Box):
         brackets.set_row_spacing(35)
         brackets.set_column_spacing(35)
         
+        # rnd = rd.Round(self.init_list)  ## A ajouter
+        
         if self.init_list != []:
             liste = [(0,0, self.init_list[0]),
                     (0,2, self.init_list[1]),
