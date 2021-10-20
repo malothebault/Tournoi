@@ -51,18 +51,18 @@ class ListOfName:
         ]
     
         self.list_animals = [
-            "Elephant",
-            "Crocodile",
-            "Dog",
-            "Cat",
-            "Chicken",
-            "Tiger",
-            "Lion",
-            "Cow"
+            "Elephants",
+            "Crocodiles",
+            "Dogs",
+            "Cats",
+            "Chickens",
+            "Tigers",
+            "Lions",
+            "Cows"
         ]
         
     
     def select_random(self):
         adj = random.choice(self.list_adjectives)
         ani = random.choice(self.list_animals)
-        return adj + ani
+        return "The" + adj + " " + ani
