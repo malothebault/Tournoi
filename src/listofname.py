@@ -28,20 +28,20 @@ class ListOfName:
            locale_path = os.path.join(
                os.path.abspath(
                    os.path.dirname(__file__)
-               ), 
+               ),
                'locale'
            )
            translate = gettext.translation(
-               cn.App.application_shortname, 
-               locale_path, 
-               [current_locale] 
+               cn.App.application_shortname,
+               locale_path,
+               [current_locale]
            )
            _ = translate.gettext
         except FileNotFoundError:
            _ = str
         self._ = _
         ######################################
-    
+
         self.list_adjectives = [
             "Cute",
             "Mad",
@@ -49,7 +49,7 @@ class ListOfName:
             "Angry",
             "Starving",
         ]
-    
+
         self.list_animals = [
             "Elephants",
             "Crocodiles",
@@ -60,9 +60,9 @@ class ListOfName:
             "Lions",
             "Cows"
         ]
-        
-    
+
+
     def select_random(self):
         adj = random.choice(self.list_adjectives)
         ani = random.choice(self.list_animals)
-        return "The" + adj + " " + ani
+        return "The " + adj + " " + ani
