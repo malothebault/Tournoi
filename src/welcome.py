@@ -38,7 +38,7 @@ class Welcome(Gtk.Box):
     settings = Gtk.Settings.get_default()
 
     def __init__(self, parent):
-        '''Our class will be a Gtk.Box and will contain our 
+        '''Our class will be a Gtk.Box and will contain our
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
         self.parent = parent
@@ -49,13 +49,13 @@ class Welcome(Gtk.Box):
             locale_path = os.path.join(
                 os.path.abspath(
                     os.path.dirname(__file__)
-                ), 
+                ),
                 'locale'
             )
             translate = gettext.translation(
-                cn.App.application_shortname, 
-                locale_path, 
-                [current_locale] 
+                cn.App.application_shortname,
+                locale_path,
+                [current_locale]
             )
             _ = translate.gettext
         except FileNotFoundError:
@@ -66,7 +66,7 @@ class Welcome(Gtk.Box):
         '''Here we are creating a new Welcome Widget from the Granite library'''
         welcome = Granite.WidgetsWelcome()
         welcome = welcome.new(
-            _("Welcome"), 
+            _("Welcome"),
             cn.App.application_description
         )
 
@@ -78,15 +78,15 @@ class Welcome(Gtk.Box):
         )
         welcome.append(
             "document-open-recent",
-            _('Open recent tournament'), 
+            _('Open recent tournament'),
             _('Open a recent Tournament session from file')
         )
 
-        '''Here we are connecting the on_welcome_activated method to the 
-        activated signal of the Welcome Widget, so this will be triggered 
+        '''Here we are connecting the on_welcome_activated method to the
+        activated signal of the Welcome Widget, so this will be triggered
         when an action is activated'''
         welcome.connect("activated", self.on_welcome_activated)
-        
+
         self.parent.parent.hbar.hbar_save_file.set_sensitive(False)
         self.parent.parent.hbar.hbar_print.set_sensitive(False)
 
