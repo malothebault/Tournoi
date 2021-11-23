@@ -6,4 +6,4 @@
 - [x] Build the settings view
 - [x] Create the Team class
 - [x] Random team names generator
-- [ ] Intialise with gradint of blue and red
+- [ ] Intialise with gradient of blue and red
